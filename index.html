@@ -1,79 +1,36 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>Loading</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: black;
-}
-
-/* GIF фон */
-#background {
-    position: fixed;
-    inset: 0;
-    background-image: url("./background.gif");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* Регулятор громкости */
-#volume {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 180px;
-    opacity: 0.7;
-}
-#volume:hover {
-    opacity: 1;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Blitz Project - SCPRP</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div id="background"></div>
-
-<input type="range" id="volume" min="0" max="100" value="50">
-
-<audio id="music" loop preload="auto">
-    <source src="/project_blitz_scprp/music.mp3" type="audio/mpeg">
+<!-- Аудио -->
+<audio id="bg-music" loop>
+  <source src="asset/music.mp3" type="audio/mpeg">
 </audio>
 
-<script>
-const music = document.getElementById("music");
-const volume = document.getElementById("volume");
+<div class="overlay"></div>
 
-// стартовая громкость
-music.volume = volume.value / 100;
+<div class="side-text left"></div>
+<div class="side-text right"></div>
 
-// изменение громкости
-volume.addEventListener("input", () => {
-    music.volume = volume.value / 100;
-});
+<div class="center">
+  <div class="server-name">
+    Blitz Project — SCPRP
+  </div>
 
-// автозапуск (GMod / Chromium)
-window.addEventListener("load", () => {
-    const playPromise = music.play();
-    if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            document.body.addEventListener("click", () => {
-                music.play();
-            }, { once: true });
-        });
-    }
-});
-</script>
+  <div class="loading">
+    <span id="loadingText"></span>
+  </div>
 
+  <div class="hint">
+    CLICK TO INITIALIZE AUDIO
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
-
 </html>

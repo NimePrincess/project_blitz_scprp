@@ -1,0 +1,83 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Courier New", monospace;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  background: url("asset/background.gif") no-repeat center center fixed;
+  background-size: cover;
+  color:#00bfff;
+}
+
+/* затемнение */
+.overlay{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter: blur(2px);
+  z-index:1;
+}
+
+/* центр */
+.center{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  z-index:2;
+}
+
+.server-name{
+  font-size:28px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  text-shadow: 0 0 10px #00bfff;
+  animation: glow 3s infinite ease-in-out;
+}
+
+@keyframes glow{
+  0%{ text-shadow:0 0 5px #00bfff; }
+  50%{ text-shadow:0 0 20px #00bfff; }
+  100%{ text-shadow:0 0 5px #00bfff; }
+}
+
+.loading{
+  margin-top:25px;
+  font-size:16px;
+  opacity:0.9;
+  min-height:20px;
+}
+
+/* подсказка */
+.hint{
+  margin-top:15px;
+  font-size:11px;
+  opacity:0.4;
+  letter-spacing:2px;
+}
+
+/* падающий текст */
+.side-text{
+  position:absolute;
+  width:280px;
+  font-size:12px;
+  opacity:0.25;
+  line-height:1.6;
+  white-space:pre;
+  animation: fall 35s linear infinite;
+  z-index:2;
+}
+
+.left{ left:20px; }
+.right{ right:20px; }
+
+@keyframes fall{
+  from{ transform: translateY(-100%); }
+  to{ transform: translateY(100%); }
+}
