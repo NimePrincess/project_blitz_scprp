@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <title>Loading</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 html, body {
     margin: 0;
     padding: 0;
+    width: 100%;
     height: 100%;
     overflow: hidden;
     background: black;
 }
 
 /* GIF фон */
-#bg {
+#background {
     position: fixed;
     inset: 0;
-    background-image: url("./background.gif");
+    background-image: url("/project_blitz_scprp/background.gif");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-/* Ползунок */
+/* Регулятор громкости */
 #volume {
     position: fixed;
     bottom: 20px;
@@ -39,36 +41,37 @@ html, body {
 
 <body>
 
-<div id="bg"></div>
+<div id="background"></div>
 
 <input type="range" id="volume" min="0" max="100" value="50">
 
-<audio id="music" loop>
-    <source src="./music.mp3" type="audio/mpeg">
+<audio id="music" loop preload="auto">
+    <source src="/project_blitz_scprp/music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-var music = document.getElementById("music");
-var volume = document.getElementById("volume");
+const music = document.getElementById("music");
+const volume = document.getElementById("volume");
 
-// громкость
+// стартовая громкость
 music.volume = volume.value / 100;
 
-volume.oninput = function() {
-    music.volume = this.value / 100;
-};
+// изменение громкости
+volume.addEventListener("input", () => {
+    music.volume = volume.value / 100;
+});
 
-// В GMod автозапуск может блокироваться — пробуем принудительно
-window.onload = function() {
-    var playPromise = music.play();
+// автозапуск (GMod / Chromium)
+window.addEventListener("load", () => {
+    const playPromise = music.play();
     if (playPromise !== undefined) {
-        playPromise.catch(function() {
-            document.body.addEventListener("click", function() {
+        playPromise.catch(() => {
+            document.body.addEventListener("click", () => {
                 music.play();
             }, { once: true });
         });
     }
-};
+});
 </script>
 
 </body>
