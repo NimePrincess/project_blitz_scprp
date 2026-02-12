@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Blitz Project - SCPRP</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+    font-family: Consolas, monospace;
+    color: #00bfff;
+}
+
+/* Фоновый бегущий код */
+.code-left, .code-right {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    font-size: 14px;
+    color: rgba(0,191,255,0.15);
+    white-space: pre;
+    overflow: hidden;
+    animation: scroll 15s linear infinite;
+}
+
+.code-left {
+    left: 0;
+}
+
+.code-right {
+    right: 0;
+}
+
+@keyframes scroll {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+/* Центр экрана */
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Логотип */
+.logo img {
+    width: 220px;
+}
+
+/* Название */
+.title {
+    margin-top: 20px;
+    font-size: 36px;
+    letter-spacing: 3px;
+}
+
+/* Мигание текста */
+.loading {
+    margin-top: 40px;
+    font-size: 18px;
+    animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+    0% {opacity: 1;}
+    50% {opacity: 0.2;}
+    100% {opacity: 1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Бегущий код -->
+<div class="code-left">
+01001000 01000001 01000011 01001011
+SCP-███ CONTAINMENT ACTIVE
+PROTOCOL 7 INITIALIZED
+███ SECURITY CLEARANCE REQUIRED
+00101010 0111011010 1010011 10100110
+``````````idi nahuy`````````````````
+</div>
+
+<div class="code-right">
+ACCESS LEVEL 4 REQUIRED
+OVERRIDE DENIED
+CONTAINMENT BREACH: FALSE
+DATA ENCRYPTED █████
+ENGAGE OMEGA-1 UNIT
+█████ TO SITE
+</div>
+
+<!-- Центр -->
+<div class="center">
+
+    <div class="logo">
+        <!-- ВСТАВЬ СВОЮ ГИФКУ ВМЕСТО ПУТИ -->
+        <img src="logo.gif">
+    </div>
+
+    <div class="title">
+        Blitz Project - SCPRP
+    </div>
+
+    <div class="loading">
+        Загрузка протоколов безопасности...
+    </div>
+
+</div>
+
+<!-- Музыка -->
+<audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+</body>
+</html>
