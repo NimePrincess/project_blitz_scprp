@@ -1,26 +1,75 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Loading</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Loading</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
+
+/* GIF фон */
+#bg {
+    position: fixed;
+    inset: 0;
+    background-image: url("./background.gif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Ползунок */
+#volume {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 180px;
+    opacity: 0.7;
+}
+#volume:hover {
+    opacity: 1;
+}
+</style>
 </head>
+
 <body>
 
-    <!-- GIF фон -->
-    <div id="background"></div>
+<div id="bg"></div>
 
-    <!-- Регулятор громкости -->
-    <div class="volume-container">
-        <input type="range" id="volume" min="0" max="100" value="50">
-    </div>
+<input type="range" id="volume" min="0" max="100" value="50">
 
-    <!-- Музыка -->
-    <audio id="music" loop preload="auto">
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+<audio id="music" loop>
+    <source src="./music.mp3" type="audio/mpeg">
+</audio>
 
-    <script src="script.js"></script>
+<script>
+var music = document.getElementById("music");
+var volume = document.getElementById("volume");
+
+// громкость
+music.volume = volume.value / 100;
+
+volume.oninput = function() {
+    music.volume = this.value / 100;
+};
+
+// В GMod автозапуск может блокироваться — пробуем принудительно
+window.onload = function() {
+    var playPromise = music.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(function() {
+            document.body.addEventListener("click", function() {
+                music.play();
+            }, { once: true });
+        });
+    }
+};
+</script>
+
 </body>
 </html>
